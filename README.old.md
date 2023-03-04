@@ -1,2 +1,0 @@
-# amr_industrialRobots
-interface

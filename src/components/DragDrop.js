@@ -1,51 +1,50 @@
-import React, { useState } from "react";
-import Picture from "./Picture";
+import React, { useState } from 'react'
+import Picture from './Picture';
+import "../App.css";
 import {useDrop} from "react-dnd"
-import "../App.css"
-
 const PictureList = [
   {
     id: 1,
-    url: "https://media.istockphoto.com/id/1170650529/tr/foto%C4%9Fraf/tamamlanan-g%C3%B6revler-yap%C4%B1lacaklar-listesinde-i%C5%9Faretlenir.jpg?b=1&s=612x612&w=0&k=20&c=mVhgmDiSbexsYEPV7bffACX_rnA2HWiyQIpV9utr2mQ="
+    url: "https://cdn.pixabay.com/photo/2023/01/31/05/59/zebra-7757193_640.jpg",
   },
   {
     id: 2,
-    url: "https://media.istockphoto.com/id/1285082518/tr/foto%C4%9Fraf/ata%C5%9Fl%C4%B1-tablet-yap%C4%B1lacaklar-listesi-3d-ill%C3%BCstrasyon-3d-render.jpg?b=1&s=612x612&w=0&k=20&c=5sGFzHgny--OZzSRG3Mvp9lq2kDdWHpSHOrXzoglMvY="
+    url: "https://cdn.pixabay.com/photo/2023/02/13/10/30/eye-7787024__340.jpg",
   },
   {
     id: 3,
-    url: "https://media.istockphoto.com/id/867672394/tr/foto%C4%9Fraf/not-defteri-ile-fikir-veya-yap%C4%B1lacaklar-listesini-bir-fincan-kahve-parlak-mavi-zemin.jpg?b=1&s=612x612&w=0&k=20&c=1HhcpbOaVsUxDyz_v1TXkvy6qREJ2Z9ra6s_UD13xGc="
+    url: "https://cdn.pixabay.com/photo/2022/12/25/04/05/living-room-7676789_640.jpg",
   },
 ];
 
 function DragDrop() {
     const [board, setBoard] = useState([]);
-    const [{isOver},drop]= useDrop(()=>({
-        accept:"image",
-        drop:(item) => addImageToBoard(item.id),
-        collect:(monitor) => ({
-            isOver:!!monitor.isOver(),
-        })
-    }))
-const addImageToBoard = (id) =>{
-    const pictureList = PictureList.filter((picture)=> id === picture.id);
-    setBoard((board) =>[...board,pictureList[0]])
-
+    const [{ isOver }, drop] = useDrop(() => ({
+      accept: "image",
+      drop: (item) => addImageToBoard(item.id),
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+      }),
+    }));
+const addImageToBoard = (id)=>{
+// console.log(id);
+const pictureList = PictureList.filter((picture)=> id === picture.id);
+setBoard((board)=>[...board,pictureList[0]]) //! board a çoklu ekleme yapmak için
+// setBoard([pictureList[0]]); //! board a tek bir şey ekleme yapmak için
 }
   return (
     <>
-      <div className="Pictures">
-        {PictureList.map((picture) => {
-          return <Picture url={picture.url} id={picture.id} />
-        })}
-      </div>
-      <div className="Board">
+    <div className="Pictures">{PictureList.map((picture)=>{
+        return <Picture key={picture.id} url={picture.url} id={picture.id}/>
+    })} </div>
+    <div className="Board" ref={drop}>
         {board.map((picture)=>{
-            return <Picture url={picture.url} id={picture.id} />;
+            return <Picture url={picture.url} id={picture.id} />
         })}
-      </div>
+    </div>
+
     </>
-  );
+  )
 }
 
-export default DragDrop;
+export default DragDrop
