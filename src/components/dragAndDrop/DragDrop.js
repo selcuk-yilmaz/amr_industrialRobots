@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import Picture from './Picture';
-import "../App.css";
-import {useDrop} from "react-dnd"
+import "../../App.css";
+import {useDrop} from "react-dnd";
+
 const PictureList = [
   {
     id: 1,

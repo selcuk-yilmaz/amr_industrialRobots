@@ -58,3 +58,10 @@ body {
 .dl-item.floating {
   width: 85%;
 }
+
+.react_list_container{
+  display: flex;
+}
+.react_list_choose{
+  display: flex;
+}

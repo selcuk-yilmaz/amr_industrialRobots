@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useDrag } from "react-dnd";
+import "../../App.css";
 import RLDD from "react-list-drag-and-drop/lib/RLDD";
-import bananas from "./bananas.json";
-import "../../index.css";
 
-export default function Example() {
-  const [items, setItems] = useState(bananas.bananas);
+function Board({ id, url }) {
+     const [items, setItems] = useState();
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "image",
+    item: { id: id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
 
   const itemRenderer = (item, index) => {
     return (
@@ -21,26 +28,16 @@ export default function Example() {
   const handleRLDDChange = (reorderedItems) => {
     setItems(reorderedItems);
   };
-
   return (
     <div>
-      <h1>react-list-drag-and-drop</h1>
-      <p>
-        <a href="https://www.npmjs.com/package/react-list-drag-and-drop">
-          <img
-            alt="npm install react-list-drag-and-drop"
-            src="https://nodei.co/npm/react-list-drag-and-drop.png?mini=true"
-          />
-        </a>
-      </p>
-      <h2>Javascript Example 1: Draggable List of Bananas</h2>
-      <p>Drag and drop items to re-order the list.</p>
       <RLDD
         cssClasses="example"
-        items={items}
+        items={url}
         itemRenderer={itemRenderer}
         onChange={handleRLDDChange}
       />
     </div>
   );
 }
+
+export default Board;
