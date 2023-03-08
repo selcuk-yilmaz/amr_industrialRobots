@@ -77,10 +77,10 @@ export default function Example() {
           isOver: !!monitor.isOver(),
         }),
       }));
-      const addImageToBoard = (id) => {
+      const addImageToBoard = async (id) => {
         // console.log(id);
-        const pictureList = getAllDuties.filter((picture) => id === picture._id);
-        setBoard((board) => [...board, pictureList[0]]); //! board a çoklu ekleme yapmak için
+         const pictureList = getAllDuties.filter((duty) => id === duty._id);
+         setBoard((board) => [...board, pictureList[0]]); //! board a çoklu ekleme yapmak için
         // setBoard([pictureList[0]]); //! board a tek bir şey ekleme yapmak için
       };
   console.log(getAllDuties);
