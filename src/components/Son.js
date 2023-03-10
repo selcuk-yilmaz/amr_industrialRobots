@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
 import SonSbling from "./SonSbling";
+import SonSblingBoard from "./SonSblingBoard";
 import axios from "axios";
 import { useDrop } from "react-dnd";
+import RLDD from "react-list-drag-and-drop/lib/RLDD";
+import bananas from "./example_RLDD/bananas.json";
 
 export default function Example() {
   const hostName = process.env.REACT_APP_HOSTNAME_ENDPOINT;
-  const [items, setItems] = useState();
+  const [items, setItems] = useState(bananas.bananas);
   const [getAllDuties, setGetAllDuties] = useState([]);
   const [toGoTasks, setToGoTasks] = useState(null);
   const [board, setBoard] = useState([]);
@@ -126,7 +129,7 @@ export default function Example() {
           >
             {board?.map((duty, index) => {
               return (
-                <SonSbling
+                <SonSblingBoard
                   key={index}
                   id={duty._id}
                   title={duty.name}
@@ -136,6 +139,12 @@ export default function Example() {
               );
             })}
           </div>
+          <RLDD
+            cssClasses="example"
+             items={items}
+             itemRenderer={itemRenderer}
+             onChange={handleRLDDChange}
+          />
         </div>
       </div>
     </>
