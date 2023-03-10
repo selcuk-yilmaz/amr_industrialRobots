@@ -1,8 +1,7 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 
-const MiniExample = ({ id, title, body, index }) => {
-  
+const SonSbling = ({ id, title, body, index }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "image",
     item: { id: id },
@@ -22,4 +21,4 @@ const MiniExample = ({ id, title, body, index }) => {
   );
 };
 
-export default MiniExample;
+export default SonSbling;

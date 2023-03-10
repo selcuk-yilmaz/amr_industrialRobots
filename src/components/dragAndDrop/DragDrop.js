@@ -29,6 +29,7 @@ function DragDrop() {
     }));
 const addImageToBoard = (id)=>{
 // console.log(id);
+console.log(PictureList);
 const pictureList = PictureList.filter((picture)=> id === picture.id);
 setBoard((board)=>[...board,pictureList[0]]) //! board a çoklu ekleme yapmak için
 // setBoard([pictureList[0]]); //! board a tek bir şey ekleme yapmak için
@@ -37,13 +38,13 @@ setBoard((board)=>[...board,pictureList[0]]) //! board a çoklu ekleme yapmak i�
     <>
     <div className="Pictures">{PictureList.map((picture)=>{
         return <Picture key={picture.id} url={picture.url} id={picture.id}/>
-    })} </div>
+    })} 
+    </div>
     <div className="Board" ref={drop}>
         {board.map((picture)=>{
             return <Picture url={picture.url} id={picture.id} />
         })}
     </div>
-
     </>
   )
 }
